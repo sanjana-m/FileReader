@@ -1,6 +1,7 @@
 package com.sanjana.services.decompression;
 
 import com.sanjana.file.File;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,7 +44,7 @@ public class DecompressionFactoryTest {
 
         DecompressionService service = factory.getService(file, "TestData/GzipEncrypted.txt.gz");
 
-        assertEquals("GzipDecompression", service.getClass().getSimpleName());
+        Assert.assertEquals("GzipDecompression", service.getClass().getSimpleName());
         assertEquals("GZIPInputStream", service.inputStream.getClass().getSimpleName());
     }
 }

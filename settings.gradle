@@ -1,2 +1,6 @@
 rootProject.name = 'FileReader'
+include 'service'
+include 'decoding'
+include 'decryption'
+include 'decompression'
 

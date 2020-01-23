@@ -1,5 +1,6 @@
 package com.sanjana.utils;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -26,6 +27,6 @@ public class CommandLineProcessorTest {
     @Test
     public void shouldCreateFileIfArgsIsValid() {
         String[] args = {"charset=utf-8"};
-        assertEquals("utf-8", CommandLineProcessor.process(args).getEncoding());
+        Assert.assertEquals("utf-8", CommandLineProcessor.process(args).getEncoding());
     }
 }

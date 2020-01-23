@@ -34,15 +34,7 @@ public class CommandLineProcessor {
             return null;
         }
 
-
         File file = new File();
-
-        // Validate the command line args
-        // Print usage and add a --help which prints usage
-        // convert to lower case.
-        // This is the interface through which the program is run
-        // Need to make sure its easy to use
-
         for(String arg : commandLineArgs) {
             setFileAttribute(arg.split("="), file);
         }

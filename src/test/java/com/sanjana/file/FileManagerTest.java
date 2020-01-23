@@ -46,7 +46,7 @@ public class FileManagerTest {
     @Test
     public void shouldReturnCreatedDecompressedFileIfSpecified() {
         File file = new File();
-        file.setPath("TestData/BzipUnencrypted.tar.bz2");
+        file.setPath("blah_txt.tar.bz2");
         file.setCompression("bzip");
 
         String outputFile = FileManager.process(file);
@@ -81,7 +81,7 @@ public class FileManagerTest {
     @Test
     public void shouldReturnCreatedDecryptedFileIfSpecified() {
         File file = new File();
-        file.setPath("TestData/EncryptedText.txt");
+        file.setPath("blah_encrypted.txt");
         file.setEncryption("aes128");
         file.setPrivateKey("tellmeyoursecret");
 
@@ -106,7 +106,7 @@ public class FileManagerTest {
     @Test
     public void shouldReturnCreatedDecodedFileIfSpecified() {
         File file = new File();
-        file.setPath("TestData/PlainText.txt");
+        file.setPath("blah.txt");
         file.setEncoding("utf-8");
 
         String outputFile = FileManager.process(file);

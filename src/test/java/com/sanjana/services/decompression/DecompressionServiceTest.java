@@ -55,6 +55,20 @@ public class DecompressionServiceTest {
     }
 
     @Test
+    public void shouldReturnNewFilePathWithDecompressedData() throws Exception {
+        String inputFile = "TestData/BzipUnencrypted.tar.bz2";
+
+        File file = new File();
+        file.setPath(inputFile);
+        file.setCompression("bzip");
+
+        service = factory.getService(file, inputFile);
+        String output = service.decompress();
+
+        assertEquals(service.getOutputFile(inputFile), output);
+    }
+
+    @Test
     public void shouldCreateNewFileWithDecompressedData() throws Exception {
         String inputFile = "TestData/BzipUnencrypted.tar.bz2";
 

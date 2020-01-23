@@ -1,18 +1,11 @@
 package com.sanjana.file;
 
-import com.sanjana.services.ServiceProducer;
-import com.sanjana.services.decoding.DecodingService;
-import com.sanjana.services.decompression.DecompressionService;
-import com.sanjana.services.decryption.DecryptionService;
+import com.sanjana.producers.ServiceProducer;
 import com.sanjana.utils.Utils;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import static com.sanjana.services.ServiceProducer.FACTORIES.DECOMPRESSION;
-import static com.sanjana.services.ServiceProducer.FACTORIES.DECODING;
-import static com.sanjana.services.ServiceProducer.FACTORIES.DECRYPTION;
+import static com.sanjana.producers.ServiceProducer.FACTORIES.DECOMPRESSION;
+import static com.sanjana.producers.ServiceProducer.FACTORIES.DECODING;
+import static com.sanjana.producers.ServiceProducer.FACTORIES.DECRYPTION;
 
 /**
  * This is where the file actually gets read and processed, which happens in the static method process()
@@ -21,8 +14,6 @@ import static com.sanjana.services.ServiceProducer.FACTORIES.DECRYPTION;
  */
 
 public class FileManager {
-    private static final Logger logger = LogManager.getLogger(FileManager.class);
-
     public static String process(File file) {
         if(file == null || Utils.isStringBlank(file.getPath())) {
             System.out.println("Please enter a valid file");
@@ -30,36 +21,31 @@ public class FileManager {
         }
 
         String outputFile = file.getPath();
+        ServiceProducer producer = new ServiceProducer();
 
         if (file.hasCompression()) {
             try {
-                DecompressionService service = (DecompressionService) ServiceProducer.getFactory(DECOMPRESSION).getService(file, outputFile);
-                outputFile = service.decompress();
-            } catch (Exception e) {
-                System.out.println("There has been an exception in decompression - " + e.getMessage());
-                logger.log(Level.ERROR, e);
+                outputFile = producer.perform(DECOMPRESSION, outputFile, file, outputFile);
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
                 return null;
             }
         }
 
         if (file.hasEncryption()) {
             try {
-                DecryptionService service = (DecryptionService) ServiceProducer.getFactory(DECRYPTION).getService(file, outputFile);
-                outputFile = service.decrypt();
+                outputFile = producer.perform(DECRYPTION, outputFile, file, outputFile);
             } catch (Exception e) {
-                System.out.println("There has been an exception in decryption - " + e.getMessage());
-                logger.log(Level.ERROR, e);
+                System.out.println(e.getMessage());
                 return null;
             }
         }
 
         if(file.hasEncoding()) {
             try {
-                DecodingService service = (DecodingService) ServiceProducer.getFactory(DECODING).getService(file, outputFile);
-                outputFile = service.decode();
+                outputFile = outputFile = producer.perform(DECODING, outputFile, file, outputFile);
             } catch (Exception e) {
-                System.out.println("There has been an exception in decoding - " + e.getMessage());
-                logger.log(Level.ERROR, e);
+                System.out.println(e.getMessage());
                 return null;
             }
         }

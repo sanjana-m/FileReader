@@ -41,9 +41,9 @@ public class DecodingFactoryTest {
     public void shouldReturnValidServiceForSupportedEncoding() throws Exception {
         File file = new File();
         file.setEncoding("utf-8");
-        DecodingService service = factory.getService(file, "TestData/PlainText.txt");
+        DecodingService service = factory.getService(file, "blah.txt");
         assertEquals("DecodingService", service.getClass().getSimpleName());
-        assertEquals("TestData/PlainText.txt", service.getFilePath());
+        assertEquals("blah.txt", service.getFilePath());
         assertEquals(StandardCharsets.UTF_8, service.getCharset());
     }
 }

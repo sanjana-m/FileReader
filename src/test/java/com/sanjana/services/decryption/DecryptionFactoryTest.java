@@ -1,6 +1,7 @@
 package com.sanjana.services.decryption;
 
 import com.sanjana.file.File;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,6 +56,6 @@ public class DecryptionFactoryTest {
 
         DecryptionService service = factory.getService(file, "TestData/EncryptedText.txt");
 
-        assertEquals("AesDecryption", service.getClass().getSimpleName());
+        Assert.assertEquals("AesDecryption", service.getClass().getSimpleName());
     }
 }

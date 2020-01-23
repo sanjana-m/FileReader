@@ -2,6 +2,7 @@ package com.sanjana.services;
 
 import com.sanjana.file.File;
 import com.sanjana.services.decoding.DecodingFactory;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -9,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class ServiceFactoryTest {
     @Test
     public void shouldReturnClassNameOfFactory() {
-        assertEquals("com.sanjana.services.decoding.DecodingFactory", (new DecodingFactory()).getFactoryName());
+        Assert.assertEquals("com.sanjana.services.decoding.DecodingFactory", (new DecodingFactory()).getFactoryName());
     }
 
     @Test(expected = Exception.class)
